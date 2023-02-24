@@ -25,7 +25,6 @@ def get_max_salary(path: str) -> int:
         match = re.fullmatch(r"^[0-9]+$", job["max_salary"])
         if match is not None and job["max_salary"] != "":
             jobs_salaries.append(int(job["max_salary"]))
-    print(jobs_salaries)
 
     return max(jobs_salaries)
 
@@ -45,7 +44,14 @@ def get_min_salary(path: str) -> int:
     int
         The minimum salary paid out of all job opportunities
     """
-    raise NotImplementedError
+    jobs = read(path)
+    jobs_salaries = []
+    for job in jobs:
+        match = re.fullmatch(r"^[0-9]+$", job["min_salary"])
+        if match is not None and job["min_salary"] != "":
+            jobs_salaries.append(int(job["min_salary"]))
+
+    return min(jobs_salaries)
 
 
 def matches_salary_range(job: Dict, salary: Union[int, str]) -> bool:
