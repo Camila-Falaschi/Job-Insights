@@ -1,4 +1,7 @@
-from typing import Union, List, Dict
+import re
+from typing import Dict, List, Union
+
+from src.insights.jobs import read
 
 
 def get_max_salary(path: str) -> int:
@@ -16,7 +19,15 @@ def get_max_salary(path: str) -> int:
     int
         The maximum salary paid out of all job opportunities
     """
-    raise NotImplementedError
+    jobs = read(path)
+    jobs_salaries = []
+    for job in jobs:
+        match = re.fullmatch(r"^[0-9]+$", job["max_salary"])
+        if match is not None and job["max_salary"] != "":
+            jobs_salaries.append(int(job["max_salary"]))
+    print(jobs_salaries)
+
+    return max(jobs_salaries)
 
 
 def get_min_salary(path: str) -> int:
