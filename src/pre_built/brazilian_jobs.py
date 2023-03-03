@@ -1,7 +1,6 @@
 from functools import lru_cache
-from typing import Dict, List
-
 from src.insights import jobs
+from typing import List, Dict
 
 
 @lru_cache
